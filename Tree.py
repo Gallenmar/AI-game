@@ -9,10 +9,12 @@ class TreeNode:
         self.child2 = None
         self.child3 = None
 
+        self.heiristiskaVertiba = None
+
     def print_node_and_path(self, path=""):
         """Prints the node's attributes and path leading to it."""
         print("Path:", path, " -> ", str(self.number))
-        print("PP:", self.pp, "CP:", self.cp, "Bank:", self.bank, "Turn:", self.turn)
+        print("PP:", self.pp, "CP:", self.cp, "Bank:", self.bank, "Turn:", self.turn, "HV:", self.heiristiskaVertiba)
         print("------------------------")
         if self.child1:
             self.child1.print_node_and_path(path + " -> " + str(self.number))
@@ -25,7 +27,7 @@ class TreeNode:
         """Prints the leaf nodes of the tree."""
         if not self.child1 and not self.child2 and not self.child3:
             print("Path:", path, " -> ", str(self.number))
-            print("PP:", self.pp, "CP:", self.cp, "Bank:", self.bank, "Turn:", self.turn)
+            print("PP:", self.pp, "CP:", self.cp, "Bank:", self.bank, "Turn:", self.turn, "HV:", self.heiristiskaVertiba)
             print("------------------------")
         if self.child1:
             self.child1.print_leaf_nodes(path + " -> " + str(self.number))
