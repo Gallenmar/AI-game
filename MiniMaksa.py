@@ -23,7 +23,7 @@ def MiniMax(root, vaiLimenisIrMax):
             if(root.child2.heiristiskaVertiba == None):
                 root.child2 = MiniMax(root.child2, not vaiLimenisIrMax)
             if(root.child3.heiristiskaVertiba == None):
-               root.child3 = MiniMax(root.child3, not vaiLimenisIrMax)
+                root.child3 = MiniMax(root.child3, not vaiLimenisIrMax)
 
     
         if(vaiLimenisIrMax):
