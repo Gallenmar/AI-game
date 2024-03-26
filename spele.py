@@ -1,5 +1,6 @@
 import random
 import MiniMaksa
+import alphaBeta
 
 def evaluate_turn(current_number, human_points, computer_points, bank_points):
     total_points = human_points + computer_points
@@ -65,9 +66,12 @@ def main():
             break
 
         print("\nDatora gājiens:")
-        #MiniMaksa
+        #MiniMaksa AND alphaBeta
         dzilums = 7
-        computer_multiplier = MiniMaksa.MiniMaxIzvele(current_number, human_points, computer_points, bank_points, dzilums)
+
+        # UNCOMMENT THIS LINE TO PICK MINIMAX
+        #computer_multiplier = MiniMaksa.MiniMaxIzvele(current_number, human_points, computer_points, bank_points, dzilums)
+        computer_multiplier = alphaBeta.AlphaBetaIzvele(current_number, human_points, computer_points, bank_points, dzilums)
         #computer_multiplier = random.choice([2, 3, 4])
 
         print("Dators izvēlējās reizināt ar", computer_multiplier)
