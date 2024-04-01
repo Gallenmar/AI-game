@@ -1,8 +1,8 @@
 import Tree
 
-number = 3 # picking a number (in the rules of the game it should be from 25 to 40)
-counter = 4 # how deep the algorithm will build a tree
-root = Tree.TreeNode(number, 0, 0, 0, 'c') # creating a root node
+number = 29 # picking a number (in the rules of the game it should be from 25 to 40)
+counter = 6 # how deep the algorithm will build a tree
+root = Tree.TreeNode(number, 0, 0, 0, 'p') # creating a root node
 # def __init__(self, number, pp, cp, bank, turn):
 
 root = Tree.tree_maker(root, counter) # calling a function to create a tree
