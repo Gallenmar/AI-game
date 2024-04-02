@@ -15,12 +15,15 @@ def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
         else:
             root.heiristiskaVertiba = 0
 
+    
+
     else:
         if vaiLimenisIrMax:
             v = float('-inf')
             children = [root.child1, root.child2, root.child3]
             for child in children:
-                v = max(v, AlphaBeta(child, alpha, beta, not vaiLimenisIrMax))
+                tmp = AlphaBeta(child, alpha, beta, not vaiLimenisIrMax)
+                v = max(v, tmp)
                 alpha = max(alpha, v)
                 if beta <= alpha:
                     break
@@ -29,7 +32,8 @@ def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
             v = float('inf')
             children = [root.child1, root.child2, root.child3]
             for child in children:
-                v = min(v, AlphaBeta(child, alpha, beta, not vaiLimenisIrMax))
+                tmp = AlphaBeta(child, alpha, beta, not vaiLimenisIrMax)
+                v = min(v, tmp)
                 beta = min(beta, v)
                 if beta <= alpha:
                     break
@@ -41,7 +45,8 @@ def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
 def AlphaBetaIzvele(number, humanPoints, computerPoints, bankPoints, dzilums):
     root = Tree.TreeNode(number, humanPoints, computerPoints, bankPoints, 'c')
     root = Tree.tree_maker(root, dzilums)
-    val = AlphaBeta(root, float('-inf'), float('inf'), True)
+    #val = AlphaBeta(root, float('-inf'), float('inf'), True)
+    val = AlphaBeta(root, float('-inf'), float('inf'), False)
     izvele = [root.child1.heiristiskaVertiba, root.child2.heiristiskaVertiba, root.child3.heiristiskaVertiba]
     return izvele.index(val) + 2
 

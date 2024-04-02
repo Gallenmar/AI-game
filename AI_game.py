@@ -231,8 +231,10 @@ class AI_Game(metaclass=HandleViewsMeta):
     def handle_game_logic(self, gamemode, text_box):
         self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
         self.multiplier = int(self.multiplier_input.get())
+        text_box.insert(tk.END, "\nCilvēks izvēlējās reizināt ar: " + str(self.multiplier))
 
         self.current_number *= self.multiplier
+        text_box.insert(tk.END, "\nPašreizējais skaitlis: : " + str(self.current_number))
 
         if self.current_number % 2 == 0:
             self.human_points -= 1
@@ -245,18 +247,19 @@ class AI_Game(metaclass=HandleViewsMeta):
         text_box.insert(tk.END, "\nCilvēka punkti: " + str(self.human_points))
         text_box.insert(tk.END, "\nDatora punkti: " + str(self.computer_points))
         text_box.insert(tk.END, "\nBankas punkti: " + str(self.bank_points))
+        text_box.see("end")
 
-        self.evaluation_result = evaluate_turn(self.current_number, self.human_points, self.computer_points, self.bank_points)
-        if self.evaluation_result == -1:
-            text_box.insert(tk.END, "\nGājiens bija slikts.")
-        elif self.evaluation_result == 0:
-            text_box.insert(tk.END, "\nGājiens bija viduvējs.")
-        else:
-            text_box.insert(tk.END, "\nGājiens bija labs.")
+        # self.evaluation_result = evaluate_turn(self.current_number, self.human_points, self.computer_points, self.bank_points)
+        # if self.evaluation_result == -1:
+        #     text_box.insert(tk.END, "\nGājiens bija slikts.")
+        # elif self.evaluation_result == 0:
+        #     text_box.insert(tk.END, "\nGājiens bija viduvējs.")
+        # else:
+        #     text_box.insert(tk.END, "\nGājiens bija labs.")
 
         self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
         if self.current_number >= 5000:
-            self.end_round(text_box)
+            self.end_round(text_box, False)
             self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
             return
 
@@ -270,6 +273,8 @@ class AI_Game(metaclass=HandleViewsMeta):
 
         text_box.insert(tk.END, "\nDators izvēlējās reizināt ar: " + str(self.computer_multiplier))
         self.current_number *= self.computer_multiplier
+        text_box.insert(tk.END, "\nPašreizējais skaitlis: : " + str(self.current_number))
+        
 
         if self.current_number % 2 == 0:
             self.computer_points -= 1
@@ -282,23 +287,28 @@ class AI_Game(metaclass=HandleViewsMeta):
         text_box.insert(tk.END, "\nCilvēka punkti: " + str(self.human_points))
         text_box.insert(tk.END, "\nDatora punkti: " + str(self.computer_points))
         text_box.insert(tk.END, "\nBankas punkti: " + str(self.bank_points))
+        text_box.see("end")
 
-        self.evaluation_result = evaluate_turn(self.current_number, self.human_points, self.computer_points, self.bank_points)
-        if self.evaluation_result == -1:
-            text_box.insert(tk.END, "\nDatora gājiens bija slikts.")
-        elif self.evaluation_result == 0:
-            text_box.insert(tk.END, "\nDatora gājiens bija viduvējs.")
-        else:
-            text_box.insert(tk.END, "\nDatora gājiens bija labs.")
+        # self.evaluation_result = evaluate_turn(self.current_number, self.human_points, self.computer_points, self.bank_points)
+        # if self.evaluation_result == -1:
+        #     text_box.insert(tk.END, "\nDatora gājiens bija slikts.")
+        # elif self.evaluation_result == 0:
+        #     text_box.insert(tk.END, "\nDatora gājiens bija viduvējs.")
+        # else:
+        #     text_box.insert(tk.END, "\nDatora gājiens bija labs.")
 
         self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
         if self.current_number >= 5000:
-            self.end_round(text_box)
+            self.end_round(text_box, True)
             self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
             return
+        text_box.see("end")
 
-    def end_round(self, text_box):
-        self.computer_points += self.bank_points
+    def end_round(self, text_box, computer_win):
+        if computer_win:
+            self.computer_points += self.bank_points
+        else:
+            self.human_points += self.bank_points
 
         text_box.insert(tk.END, "\nBeigas!")
         text_box.insert(tk.END, "\nCilvēka punkti: " + str(self.human_points))
@@ -315,6 +325,7 @@ class AI_Game(metaclass=HandleViewsMeta):
         self.cleanup_game()
         self.current_number_display.set("Pašreizējais skaitlis: " + str(self.current_number))
         self.human_number_display.set("Izvēlētais skaitlis ir: " + str(self.human_number))
+        text_box.see("end")
 
     def cleanup_game(self):
         self.human_number = 0
