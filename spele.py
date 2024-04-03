@@ -2,24 +2,24 @@ import random
 import MiniMaksa
 import alphaBeta
 
-def evaluate_turn(current_number, human_points, computer_points, bank_points):
-    total_points = human_points + computer_points
-    points_gain = 1
+# def evaluate_turn(current_number, human_points, computer_points, bank_points):
+#     total_points = human_points + computer_points
+#     points_gain = 1
 
-    if current_number % 2 == 0:
-        points_gain *= -1
+#     if current_number % 2 == 0:
+#         points_gain *= -1
 
-    if current_number % 10 == 0 or current_number % 10 == 5:
-        points_gain += 1
+#     if current_number % 10 == 0 or current_number % 10 == 5:
+#         points_gain += 1
 
-    total_points_gain = points_gain + bank_points
+#     total_points_gain = points_gain + bank_points
 
-    remaining_distance = 5000 - current_number
+#     remaining_distance = 5000 - current_number
 
-    if remaining_distance < 1000:
-        return total_points_gain * 2
-    else:
-        return bank_points
+#     if remaining_distance < 1000:
+#         return total_points_gain * 2
+#     else:
+#         return bank_points
 
 def main():
     print("Sveiki! Laimes spēle sākas!")
@@ -53,13 +53,13 @@ def main():
         print("Datora punkti:", computer_points)
         print("Bankas punkti:", bank_points)
 
-        evaluation_result = evaluate_turn(current_number, human_points, computer_points, bank_points)
-        if evaluation_result == -1:
-            print("Gājiens bija slikts.")
-        elif evaluation_result == 0:
-            print("Gājiens bija viduvējs.")
-        else:
-            print("Gājiens bija labs.")
+        # evaluation_result = evaluate_turn(current_number, human_points, computer_points, bank_points)
+        # if evaluation_result == -1:
+        #     print("Gājiens bija slikts.")
+        # elif evaluation_result == 0:
+        #     print("Gājiens bija viduvējs.")
+        # else:
+        #     print("Gājiens bija labs.")
 
         if current_number >= 5000:
             human_points += bank_points
@@ -89,13 +89,13 @@ def main():
         print("Datora punkti:", computer_points)
         print("Bankas punkti:", bank_points)
 
-        evaluation_result = evaluate_turn(current_number, human_points, computer_points, bank_points)
-        if evaluation_result == -1:
-            print("Datora gājiens bija slikts.")
-        elif evaluation_result == 0:
-            print("Datora gājiens bija viduvējs.")
-        else:
-            print("Datora gājiens bija labs.")
+        # evaluation_result = evaluate_turn(current_number, human_points, computer_points, bank_points)
+        # if evaluation_result == -1:
+        #     print("Datora gājiens bija slikts.")
+        # elif evaluation_result == 0:
+        #     print("Datora gājiens bija viduvējs.")
+        # else:
+        #     print("Datora gājiens bija labs.")
 
         if current_number >= 5000:
             computer_points += bank_points

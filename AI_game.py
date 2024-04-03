@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import MiniMaksa
 import alphaBeta
-from spele import evaluate_turn
+# from spele import evaluate_turn
 
 
 def widget_cleanup_decorator(func):
