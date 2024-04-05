@@ -1,10 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
 
+import time
+import numpy as np
+
 import random
 import MiniMaksa
 import alphaBeta
 # from spele import evaluate_turn
+
+laiki = []
 
 
 def widget_cleanup_decorator(func):
@@ -324,11 +329,19 @@ class AI_Game(metaclass=HandleViewsMeta):
     def computer_turn(self, gamemode, text_box):
         text_box.insert(tk.END, "\n\nDatora gājiens.")
         
+        start = time.perf_counter()
         if gamemode == "alpha_beta":
             self.computer_multiplier = alphaBeta.AlphaBetaIzvele(self.current_number, self.human_points, self.computer_points, self.bank_points, self.dzilums)
 
         if gamemode == "min_max":
             self.computer_multiplier = MiniMaksa.MiniMaxIzvele(self.current_number, self.human_points, self.computer_points, self.bank_points, self.dzilums)
+        
+        
+        end = time.perf_counter()
+
+        laiki.append(end - start)
+
+        print("Datora laiks gājienam: ", end - start)
 
         text_box.insert(tk.END, "\nDators izvēlējās reizināt ar: " + str(self.computer_multiplier))
         self.current_number *= self.computer_multiplier
@@ -381,6 +394,8 @@ class AI_Game(metaclass=HandleViewsMeta):
         text_box.insert(tk.END, "\n-----------------\n")
         text_box.see("end")
 
+        print("Datora vidējais laiks gājieniem: ", np.average(laiki))
+
         self.cleanup_game()
 
     def cleanup_game(self):
@@ -391,6 +406,10 @@ class AI_Game(metaclass=HandleViewsMeta):
         self.current_number = 0
         self.alpha_beta_human_number_input_flag = False
         self.min_max_human_number_input_flag = False
+
+        laiki.clear()
+        print()
+        print()
 
 
 root = tk.Tk()
