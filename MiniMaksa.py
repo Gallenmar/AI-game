@@ -1,5 +1,8 @@
 import Tree
 
+apmekletoVirsotnuSk = 0
+
+
 # Rekursīva funkcija, kurai nodot Tree objektu, un bool mainīgo, kurš norāda vai nākamais līmenis ir max vai min līmenis
 def MiniMax(root, vaiLimenisIrMax):
     # Ja virsotne ir sturpceļa/ gala virsotne, tai piešķir hieristisko vērtību, balstoties uz cilvēka un datora punktu skaita
@@ -33,13 +36,19 @@ def MiniMax(root, vaiLimenisIrMax):
             root.heiristiskaVertiba = min(root.child1.heiristiskaVertiba, root.child2.heiristiskaVertiba, root.child3.heiristiskaVertiba)
 
     #Atgriež Tree objektu, kuram ir noteiktas visas hieristiskās vērtības
+    global apmekletoVirsotnuSk 
+    apmekletoVirsotnuSk += 1
     return root
 
 # Funkcija, no argumentie izveido koku un piešķir tās virsotnēm hieristiskās vērtības ar rekursīvo funkciju MiniMax
 def MiniMaxIzvele(number, humanPoints, computerPoints, bankPoints, dzilums):
+    global apmekletoVirsotnuSk 
+    apmekletoVirsotnuSk = 0
     root = Tree.TreeNode(number, humanPoints, computerPoints, bankPoints, 'c')
     root = Tree.tree_maker(root, dzilums)
     root = MiniMax(root, True)
+    print("Apmeklēto virsotņu skaits: ", apmekletoVirsotnuSk)
+    apmekletoVirsotnuSk = 0
 
     izvele = [root.child1.heiristiskaVertiba, root.child2.heiristiskaVertiba, root.child3.heiristiskaVertiba]
     return izvele.index(min(izvele)) + 2
