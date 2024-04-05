@@ -1,5 +1,7 @@
 import Tree
 
+apmekletoVirsotnuSk = 0
+
 def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
     if root.child1 is None and root.child2 is None and root.child3 is None:
         if root.number >= 5000:
@@ -38,17 +40,25 @@ def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
                 if beta <= alpha:
                     break
             root.heiristiskaVertiba = v
+    
+    global apmekletoVirsotnuSk 
+    apmekletoVirsotnuSk += 1
 
     return root.heiristiskaVertiba
 
 
 def AlphaBetaIzvele(number, humanPoints, computerPoints, bankPoints, dzilums):
+    global apmekletoVirsotnuSk 
+    apmekletoVirsotnuSk = 0
     root = Tree.TreeNode(number, humanPoints, computerPoints, bankPoints, 'c')
     root = Tree.tree_maker(root, dzilums)
     #val = AlphaBeta(root, float('-inf'), float('inf'), True)
     val = AlphaBeta(root, float('-inf'), float('inf'), False)
+    print("Apmeklēto virsotņu skaits: ", apmekletoVirsotnuSk)
+    apmekletoVirsotnuSk = 0
     izvele = [root.child1.heiristiskaVertiba, root.child2.heiristiskaVertiba, root.child3.heiristiskaVertiba]
     return izvele.index(val) + 2
+
 
 # Piemērs, kā izmantot AlphaBetaIzvele funkciju:
 # number = 25
