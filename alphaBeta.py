@@ -1,6 +1,7 @@
 import Tree
 
 apmekletoVirsotnuSk = 0
+apmekletasVirsotnes = []
 
 def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
     if root.child1 is None and root.child2 is None and root.child3 is None:
@@ -48,14 +49,18 @@ def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
 
 
 def AlphaBetaIzvele(number, humanPoints, computerPoints, bankPoints, dzilums):
-    global apmekletoVirsotnuSk 
+    global apmekletoVirsotnuSk, apmekletasVirsotnes
     apmekletoVirsotnuSk = 0
     root = Tree.TreeNode(number, humanPoints, computerPoints, bankPoints, 'c')
     root = Tree.tree_maker(root, dzilums)
     #val = AlphaBeta(root, float('-inf'), float('inf'), True)
     val = AlphaBeta(root, float('-inf'), float('inf'), False)
     print("Apmeklēto virsotņu skaits: ", apmekletoVirsotnuSk)
+
+    apmekletasVirsotnes.append(apmekletoVirsotnuSk)
     apmekletoVirsotnuSk = 0
+
+
     izvele = [root.child1.heiristiskaVertiba, root.child2.heiristiskaVertiba, root.child3.heiristiskaVertiba]
     return izvele.index(val) + 2
 
