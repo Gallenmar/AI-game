@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+import math
 import time
 import numpy as np
 
@@ -339,9 +340,11 @@ class AI_Game(metaclass=HandleViewsMeta):
         
         end = time.perf_counter()
 
-        laiki.append(end - start)
+        ms = (end - start) * 1000
 
-        print("Datora laiks gājienam: ", end - start)
+        laiki.append(ms)
+
+        print("Datora laiks gājienam: ", ms)
 
         text_box.insert(tk.END, "\nDators izvēlējās reizināt ar: " + str(self.computer_multiplier))
         self.current_number *= self.computer_multiplier
@@ -395,6 +398,25 @@ class AI_Game(metaclass=HandleViewsMeta):
         text_box.see("end")
 
         print("Datora vidējais laiks gājieniem: ", np.average(laiki))
+        print()
+
+        for i in laiki:
+            print(np.round(i, 4))
+        print(np.round(np.average(laiki), 4))
+
+        print()
+        print()
+
+        if(MiniMaksa.apmekletasVirsotnes != None):
+            for i in MiniMaksa.apmekletasVirsotnes:
+                print(i)
+            print(sum(MiniMaksa.apmekletasVirsotnes))
+            
+        if(alphaBeta.apmekletasVirsotnes != None):
+            for i in alphaBeta.apmekletasVirsotnes:
+                print(i)
+            print((sum(alphaBeta.apmekletasVirsotnes)))
+            
 
         self.cleanup_game()
 
@@ -408,6 +430,8 @@ class AI_Game(metaclass=HandleViewsMeta):
         self.min_max_human_number_input_flag = False
 
         laiki.clear()
+        MiniMaksa.apmekletasVirsotnes.clear()
+        alphaBeta.apmekletasVirsotnes.clear()
         print()
         print()
 
