@@ -1,4 +1,4 @@
-import Tree
+import data.Tree as Tree
 
 def AlphaBeta(root, alpha, beta, vaiLimenisIrMax):
     if root.child1 is None and root.child2 is None and root.child3 is None:

@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-import random
-import MiniMaksa
-import alphaBeta
+import data.MiniMaksa as MiniMaksa
+import data.alphaBeta as alphaBeta
 # from spele import evaluate_turn
 
 
