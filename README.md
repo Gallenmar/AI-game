@@ -1,5 +1,5 @@
 # Grupas 38 spēle
----
+
 ## Papildu prasības programmatūrai
 Spēles sākumā cilvēks-spēlētājs izvēlas, ar kuru skaitli diapazonā no 25 līdz 40 sākt spēli.
 ## Spēles apraksts
